@@ -243,7 +243,10 @@ char* jsd_egd_fault_code_to_string(jsd_egd_fault_code_t fault_code);
  *
  * This function does not assert on bad parameters, only warns users via STDOUT.
  * The improper SDO request will propagate through JSD and likely result
- * in a latched SDO error that can be cleared by a reset;
+ * in a latched SDO error that can be cleared by a reset. If the application 
+ * wants to verify the result is valid, the returned DO index must be between 
+ * 0x3000 and 0x3FFF for it to be valid
+ *
  *
  * @param tlc Two-Letter Command in capital chars  e.g. "PX"
  * @return Data Object register
@@ -300,6 +303,7 @@ void jsd_egd_async_sdo_set_unit_mode(jsd_t* self, uint16_t slave_id,
  */
 void jsd_egd_async_sdo_set_ctrl_gain_scheduling_mode(
     jsd_t* self, uint16_t slave_id, jsd_egd_gain_scheduling_mode_t mode);
+
 
 #ifdef __cplusplus
 }

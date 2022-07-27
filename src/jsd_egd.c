@@ -1077,6 +1077,9 @@ void jsd_egd_async_sdo_process(jsd_t* self, uint16_t slave_id) {
     if (!req.success) {
       ERROR("Slave[%u] Failed last SDO operation on 0x%X:%u, wkc = %d",
             slave_id, req.sdo_index, req.sdo_subindex, req.wkc);
+
+      jsd_egd_halt(self, slave_id);
+
     }else {
 
       // NOTE: If there is a usecase for low-frequency SDO
